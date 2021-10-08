@@ -83,7 +83,7 @@ HPF, RHPF
 // PASA BANDA
 BPF
 // BANDA ELIMINADA
-
+BRF
 
 // filtros resonantes
 // CLASICO SUSTRACTIVO
@@ -114,5 +114,13 @@ BPF
 	filtro = RLPF.ar(osc,fc,0.5).sum;
 	filtro!2 * env * 0.25;
 }.play;
+
+
+{
+	var snd,filtro;
+	snd = WhiteNoise.ar;
+	filtro = BRF.ar(snd,300,MouseX.kr(1.0,0.001));
+	filtro!2
+}.play
 
 s.freqscope
