@@ -70,13 +70,13 @@ OSC(modulador) >> (freq) OSC (carrier)
 // fm simple
 {SinOsc.ar(SinOsc.ar(100,0,2000)+200,0,0.5)}.play
 
-modulador y un carrier
+modulator (modulador) y un carrier (portadora)
 carrier es el escilador de salida (oscilador modulado)
 modulador es el oscilador cuya salida usamos para modular la frecuencia del carrier
 
 {
 	var carrier, modulador;
-	modulador = SinOsc.ar(404,0,2000);
+	modulador = SinOsc.ar(420,0,90000);
 	carrier = SinOsc.ar(modulador+200,0,0.5);
-	carrier = carrier * Env.perc.ar(2);
+	carrier = carrier * Env.perc(releaseTime:3).ar(2);
 }.play

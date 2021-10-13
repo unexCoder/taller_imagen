@@ -50,8 +50,11 @@ void draw() {
   println("balas: "+balas.size());
   
   // display ondas
+  int index = -1;
   for (Onda o : ondas) {
     o.display();
+    index++;
+    println(index);
   }
   println("ondas: "+ondas.size());
   
