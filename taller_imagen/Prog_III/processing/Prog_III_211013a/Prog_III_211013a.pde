@@ -73,12 +73,17 @@ void draw() {
 
   
   // colisiones
-  for (int i = 0; i <= naves.length-1; i++) {
-    for (int j = 0; j <= balas.size()-1; j++) { 
+  for (int i = 0; i < naves.length-1; i++) {
+    for (int j = 0; j < balas.size()-1; j++) { 
       Bala b = balas.get(j);
-      naves[i].checkBulletColision(b);
+      boolean shot = naves[i].checkBulletColision(b);
+      if(shot) {
+        balas.remove(j);
+      }
     }
   }
+  
+  
   for (Onda o : ondas) {
     player.checkWaveColision(o);
   }

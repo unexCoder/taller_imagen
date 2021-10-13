@@ -60,11 +60,14 @@ class Nave {
     }
   }
   
-  void checkBulletColision(Bala b) {
+  boolean checkBulletColision(Bala b) {
+    boolean shoted = false;
     float dist = dist(this.x,this.y,b.x,b.y);
-    if(dist <= 10) {
-      println("shoted");
+    if(dist <= 50) {
+      shoted = true;
+      println("shoted>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     }
+    return shoted;
   }
 
   void display() {
