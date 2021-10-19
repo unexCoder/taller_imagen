@@ -1,74 +1,66 @@
-// funciones y argumentos
+niveles
 
-{
-	var carrier, modulador;
-	modulador = SinOsc.ar(420,0,90000);
-	carrier = SinOsc.ar(modulador+200,0,0.5);
-	carrier = carrier * Env.perc(releaseTime:3).ar(2);
-}.play
+(procesador)   bajo nivel <<   ----  >> alto nivel
+
+machine code o assembler
+
+abstraccion
 
 
-// funciones en java y c++
-random(100); // funcion
+// MIDI
+musical instruments digital interface
 
-void diez_rectangulos(int x, int y) {
-	for (...) {
-		rect(...); // funcion
-	}
-}
+interface midi >> placa midi
 
-diez_rectangulos(20,20);
+en una red local yo puedo conectar programas entre si a traves
+de un protocolo de comunicacion digital
 
-// en supercollider las funciones son objetos
-{}.class
+los protocolos que podemos usar son
 
-// como argumentar funciones
-{
-	arg a,b;
-	(a * b).postln
-}.value(3, 10);
+MIDI y OSC (Open Sound Control)
 
-{
-	|a=3,b=2|
-	(a * b).postln;
-}.value(4,6);
+//
 
-// funciones en variables globales
-~media_freq = {
-	|freq = 200|
-	freq/2;
-}
+MIDI
 
-~media_freq.value(3457)
+teclado (o software en red local >> computadora
+computadora >> teclado (o software en red local)
 
-// variables globales
-// variables globales pre-declaradas
+	una coneccion >> 16 canales
 
-a..z (menos la letras s) // variables de entorno (environment variables)
+	mensaje de sistema (valor para los 16 canales)
+	y mensaje de canal (mensajes que envío para un canal independiente)
 
-// variables globales
-~sonido_1 = {
-	var carrier, modulador;
-	modulador = SinOsc.ar(420,0,90000);
-	carrier = SinOsc.ar(modulador+200,0,0.5);
-	carrier = carrier * Env.perc(releaseTime:3).ar(2);
-}
+dentro de los mensajes de canal
+	mensaje de nota y mensaje de control
 
-~sonido_1.play
+	note on 0-127
+	note off 0-127
 
-~sonido_2 = {
-	|freq = 100, ratio = 1, mod_index = 200|
-	var carrier, modulador, freq_mod;
-	freq_mod = freq * ratio;
-	modulador = SinOsc.ar(freq_mod,0,mod_index);
-	carrier = SinOsc.ar(modulador+freq,0,0.5);
-	carrier = carrier
-	//* Env.perc(releaseTime:3).ar(2);
-}.play
+	numeracion de notas midi
+	https://lh3.googleusercontent.com/proxy/nyAEOrjPtlAvPhdcHutGtTuwmpyiUIimivYtrmcBREp_-3C77V0YlR0nYpaiCbhNjBlpAET_wL0t__iqHPi4r50
 
-~sonido_2.set(\freq,500);
-~sonido_2.set(\ratio,1.618);
-~sonido_2.set(\mod_index,1000000);
+	los mensajes de control estan asociados a controles continuos
+
+/////////////////////
+
+OPEN SOUND CONTROL
+
+https://cnmat.berkeley.edu/opensoundcontrol
+
+	flag / valor o valores
+
+	el flag lo define el usuario
+	los valores asociados pueden ser numeros enteros, numeros flotantes o strings
+
+	\trig, 1
+	\nota, 60
+	\nota, 'do'
+	\release, 3.25
+	\filtros, 120,256,345,'pasabajo'
+
+
+server y el lenguaje se comunican con OSC
 
 
 // PMOsc

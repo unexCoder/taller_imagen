@@ -1,6 +1,6 @@
 // variables globales
 Estrella [] fondo;
-Nave [] naves;
+ArrayList<Nave> naves = new ArrayList<Nave>();
 NaveAmiga player;
 ArrayList<Bala> balas = new ArrayList<Bala>();
 ArrayList<Onda> ondas = new ArrayList<Onda>();
@@ -8,10 +8,11 @@ ArrayList<Onda> ondas = new ArrayList<Onda>();
 void setup() {
   size(displayWidth, displayHeight);
   frameRate(60);
+  
   // enemies >> constructor 
-  naves = new Nave [2];
-  for (int i = 0; i < naves.length-1; i++) {
-    naves[i] = new Nave();
+  int num_enemies = 50;
+  for (int i = 0; i < num_enemies; i++) {
+    naves.add(new Nave());
   }
   // fondo
   fondo = new Estrella [300];
@@ -31,6 +32,7 @@ void draw() {
   }
 
   // display and move enemies
+  /*
   for (int i = 0; i < naves.length-1; i++) {
     naves[i].move();
     ondas = naves[i].shot(ondas);
@@ -38,6 +40,12 @@ void draw() {
     for (int j = i+1; j < naves.length-1; j++) {
       naves[i].chekCollision(naves[j]);
     }
+  }
+  */
+  for (Nave n : naves) {
+    n.move();
+    ondas = n.shot(ondas);
+    n.display();
   }
 
   // display player 1
@@ -73,12 +81,14 @@ void draw() {
 
   
   // colisiones
-  for (int i = 0; i < naves.length-1; i++) {
+  for (int i = 0; i < naves.size()-1; i++) {
     for (int j = 0; j < balas.size()-1; j++) { 
       Bala b = balas.get(j);
-      boolean shot = naves[i].checkBulletColision(b);
+      Nave n = naves.get(i);
+      boolean shot =  n.checkBulletColision(b);
       if(shot) {
         balas.remove(j);
+        naves.remove(i);
       }
     }
   }
